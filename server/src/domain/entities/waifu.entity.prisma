@@ -1,0 +1,13 @@
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Waifu {
+    id String @id @db.VarChar(36)
+
+    name  String @db.VarChar(100)
+    image String
+
+    @@index([id])
+}
