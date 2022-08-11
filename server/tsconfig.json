@@ -16,7 +16,6 @@
     "sourceRoot": "src/",
     "newLine": "crlf",
     "noEmitOnError": true,
-  
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "preserveSymlinks": true,

@@ -9,5 +9,9 @@ export const waifusRoutes = (): Router => {
     waifusController.list(request, response)
   })
 
+  router.post('', (request: Request, response: Response) => {
+    waifusController.create(request, response)
+  })
+
   return router
 }
