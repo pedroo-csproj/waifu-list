@@ -4,6 +4,8 @@ import cors from 'cors'
 import helmet from 'helmet'
 import morgan from 'morgan'
 
+import { routes } from './presentation/routes/routes'
+
 dotenv.config()
 
 const app = express()
@@ -17,9 +19,7 @@ if (process.env.ENVIRONMENT === 'development') {
   app.use(morgan(':method :url :status - :response-time ms'))
 }
 
-app.use('', (req, res) => {
-  return res.status(201).json({ yamete: 'kudasai oni-chan' })
-})
+app.use(routes())
 
 const port = process.env.PORT || 3000
 
