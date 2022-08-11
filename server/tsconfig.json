@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "es2017",
     "module": "commonjs",
     "baseUrl": "src/",
     "rootDirs": [
@@ -16,15 +16,14 @@
     "sourceRoot": "src/",
     "newLine": "crlf",
     "noEmitOnError": true,
-    "isolatedModules": true,
+  
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "preserveSymlinks": true,
     "forceConsistentCasingInFileNames": true,
-    "strict": true,
+    "strict": false,
     "noImplicitAny": true,
     "strictFunctionTypes": true,
-    "strictPropertyInitialization": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
