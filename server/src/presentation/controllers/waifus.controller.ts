@@ -8,31 +8,39 @@ export class WaifusController {
   constructor (private readonly waifuServices: WaifuServices) { }
 
   async list (request: Request, response: Response): Promise<Response> {
-    const waifus = await this.waifuServices.list()
+    const listWaifus = await this.waifuServices.list()
 
-    return response.status(200).json(waifus)
+    return response.status(200).json(listWaifus.data)
   }
 
   async findById (request: Request, response: Response): Promise<Response> {
     const id = request.params.id
 
-    const waifu = await this.waifuServices.findById(id)
+    const findWaifu = await this.waifuServices.findById(id)
 
-    return response.status(200).json(waifu)
+    if (!findWaifu.status) {
+      return response.status(404).json(findWaifu.errors)
+    }
+
+    return response.status(200).json(findWaifu)
   }
 
   async create (request: Request, response: Response): Promise<Response> {
     const waifuDTO = new CreateWaifuDTO(request.body.name, request.body.image)
 
-    const id = await this.waifuServices.create(waifuDTO)
+    const createWaifu = await this.waifuServices.create(waifuDTO)
 
-    return response.status(201).json({ id })
+    return response.status(201).json({ id: createWaifu.data })
   }
 
   async update (request: Request, response: Response): Promise<Response> {
     const waifuDTO = new UpdateWaifuDTO(request.body.id, request.body.name, request.body.image)
 
-    await this.waifuServices.update(waifuDTO)
+    const updateWaifu = await this.waifuServices.update(waifuDTO)
+
+    if (!updateWaifu.status) {
+      return response.status(404).json(updateWaifu.errors)
+    }
 
     return response.status(204).send()
   }
@@ -40,7 +48,11 @@ export class WaifusController {
   async delete (request: Request, response: Response): Promise<Response> {
     const id = request.params.id
 
-    await this.waifuServices.delete(id)
+    const deleteWaifu = await this.waifuServices.delete(id)
+
+    if (!deleteWaifu.status) {
+      return response.status(404).json(deleteWaifu.errors)
+    }
 
     return response.status(204).send()
   }
