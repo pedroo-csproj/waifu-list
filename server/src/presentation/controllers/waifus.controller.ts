@@ -1,8 +1,7 @@
 import { Request, Response } from 'express'
 
 import { WaifuServices } from '../../domain/services/WaifuServices'
-import { CreateWaifuDTO } from '../../domain/dtos/CreateWaifuDTO'
-import { UpdateWaifuDTO } from '../../domain/dtos/UpdateWaifuDTO'
+import { CreateWaifuDTO, UpdateWaifuDTO } from '../../domain/dtos'
 
 export class WaifusController {
   constructor (private readonly waifuServices: WaifuServices) { }

@@ -1,10 +1,7 @@
 import { Waifu } from '@prisma/client'
 import { uuid } from 'uuidv4'
 
-import { UpdateWaifuDTO } from '../dtos/UpdateWaifuDTO'
-import { CreateWaifuDTO } from '../dtos/CreateWaifuDTO'
-import { ListWaifusDTO } from '../dtos/ListWaifusDTO'
-import { FindWaifuByIdDTO } from '../dtos/FindWaifuByIdDTO'
+import { CreateWaifuDTO, FindWaifuByIdDTO, ListWaifusDTO, UpdateWaifuDTO } from '../dtos'
 
 export const waifusToListWaifus = (waifus: Waifu[]): ListWaifusDTO[] => {
   const listWaifus = waifus.map(w => (new ListWaifusDTO(w.id, w.name)))

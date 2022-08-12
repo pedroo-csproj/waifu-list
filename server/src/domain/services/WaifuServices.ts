@@ -1,10 +1,7 @@
-import { FindWaifuByIdDTO } from '../dtos/FindWaifuByIdDTO'
-import { UpdateWaifuDTO } from '../dtos/UpdateWaifuDTO'
-import { CreateWaifuDTO } from '../dtos/CreateWaifuDTO'
-import { ListWaifusDTO } from '../dtos/ListWaifusDTO'
 import { createWaifuToWaifu, updateWaifuToWaifu, waifusToListWaifus, waifuToFindWaifuById } from '../mappers/waifuMappers'
 import { IWaifuRepository } from '../repositories/IWaifuRepository'
 import { ResultModel } from '../../crossCutting/ResultModel'
+import { CreateWaifuDTO, FindWaifuByIdDTO, ListWaifusDTO, UpdateWaifuDTO } from '../dtos'
 
 export class WaifuServices {
   constructor (private readonly waifuRepository: IWaifuRepository) { }
