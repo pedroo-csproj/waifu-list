@@ -9,8 +9,20 @@ export const waifusRoutes = (): Router => {
     waifusController.list(request, response)
   })
 
+  router.get('/:id', (request: Request, response: Response) => {
+    waifusController.findById(request, response)
+  })
+
   router.post('', (request: Request, response: Response) => {
     waifusController.create(request, response)
+  })
+
+  router.put('', (request: Request, response: Response) => {
+    waifusController.update(request, response)
+  })
+
+  router.delete('/:id', (request: Request, response: Response) => {
+    waifusController.delete(request, response)
   })
 
   return router
