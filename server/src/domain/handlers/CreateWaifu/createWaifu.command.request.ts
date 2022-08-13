@@ -1,8 +1,13 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateWaifuCommandRequest {
-  constructor(name: string) {
+  constructor(name: string, lore: string, image: string, birthDate: Date, origin: string, myAnimeListUrl: string) {
     this.name = name;
+    this.lore = lore;
+    this.image = image;
+    this.birthDate = birthDate;
+    this.origin = origin;
+    this.myAnimeListUrl = myAnimeListUrl;
   }
 
   @ApiProperty({

@@ -1,7 +1,7 @@
 import { Waifu } from ".prisma/client";
 import { Injectable } from "@nestjs/common";
 
-import { IWaifuRepository } from "src/domain/repositories/waifu.repository";
+import { IWaifuRepository } from "../../../domain/repositories/waifu.repository";
 import { PrismaService } from "../prisma.service";
 
 @Injectable()

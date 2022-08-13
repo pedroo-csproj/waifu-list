@@ -3,10 +3,10 @@ import { Inject } from "@nestjs/common";
 
 import { CreateWaifuCommandRequest } from "./createWaifu.command.request";
 import { CreateWaifuCommandResponse } from "./createWaifu.command.response";
-import { mapCreateWaifuCommandRequestToWaifu } from "src/domain/mappers/waifu.mapper";
-import { IWaifuRepository } from "src/domain/repositories/waifu.repository";
-import { ResultModel } from "src/crossCutting/result.model";
-import { validateWaifu } from "src/domain/validators/waifu.validator";
+import { IWaifuRepository } from "../../repositories/waifu.repository";
+import { ResultModel } from "../../../crossCutting/result.model";
+import { validateWaifu } from "../../validators/waifu.validator";
+import { mapCreateWaifuCommandRequestToWaifu } from "./createWaifu.mapper";
 
 @CommandHandler(CreateWaifuCommandRequest)
 export class CreateWaifuHandler
