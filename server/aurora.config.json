@@ -1,0 +1,7 @@
+{
+    "files": [
+        "./base.prisma",
+        "src/domain/entities/*.entity.prisma"
+    ],
+    "output": "prisma/schema.prisma"
+}
