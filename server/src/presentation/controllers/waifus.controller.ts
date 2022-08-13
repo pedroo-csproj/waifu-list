@@ -1,23 +1,40 @@
-import { Body, Controller, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
-import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Get, Param, Post, Res, UsePipes, ValidationPipe } from "@nestjs/common";
+import { CommandBus, QueryBus } from "@nestjs/cqrs";
+import { ApiTags } from "@nestjs/swagger";
+import { Response } from "express";
 
-import { CreateWaifuCommandRequest } from 'src/domain/handlers/CreateWaifu/createWaifu.command.request';
-import { GetWaifuByIdQueryRequest } from 'src/domain/handlers/GetWaifuById/getWaifuById.query.request';
+import { ResultModel } from "src/crossCutting/result.model";
+import { CreateWaifuCommandRequest } from "src/domain/handlers/CreateWaifu/createWaifu.command.request";
+import { CreateWaifuCommandResponse } from "src/domain/handlers/CreateWaifu/createWaifu.command.response";
+import { GetWaifuByIdQueryRequest } from "src/domain/handlers/GetWaifuById/getWaifuById.query.request";
+import { GetWaifuByIdQueryResponse } from "src/domain/handlers/GetWaifuById/getWaifuById.query.response";
 
-@Controller('waifus')
-@ApiTags('waifus')
+@Controller("waifus")
+@ApiTags("waifus")
 @UsePipes(new ValidationPipe({ transform: true }))
 export class WaifusController {
   constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 
-  @Post()
-  async create(@Body() createWaifuCommandRequest: CreateWaifuCommandRequest) {
-    return this.commandBus.execute(createWaifuCommandRequest);
+  @Get("/:id")
+  async getById(@Param() queryRequest: GetWaifuByIdQueryRequest, @Res() response: Response) {
+    const handleResult = await this.queryBus.execute<GetWaifuByIdQueryRequest, ResultModel<GetWaifuByIdQueryResponse>>(
+      queryRequest,
+    );
+
+    if (!handleResult.status) return response.status(404).json(handleResult.errors);
+
+    return response.status(200).json(handleResult.data);
   }
 
-  @Get(':id')
-  async getById(@Param() getWaifuByIdQueryRequest: GetWaifuByIdQueryRequest) {
-    return this.queryBus.execute(getWaifuByIdQueryRequest);
+  @Post()
+  async create(@Body() commandRequest: CreateWaifuCommandRequest, @Res() response: Response) {
+    const handleResult = await this.commandBus.execute<
+      CreateWaifuCommandRequest,
+      ResultModel<CreateWaifuCommandResponse>
+    >(commandRequest);
+
+    if (!handleResult.status) return response.status(400).json(handleResult.errors);
+
+    return response.status(201).json(handleResult.data);
   }
 }
