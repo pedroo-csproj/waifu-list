@@ -18,7 +18,7 @@ module.exports = {
   ignorePatterns: ['.eslintrc.js'],
   rules: {
     'prettier/prettier': ['error', { printWidth: 120 }],
-    'no-unused-vars': 1,
+    'no-unused-vars': 0,
     'semi': [2, 'always'],
     'prefer-const': 'error',
     'no-console': 1,
