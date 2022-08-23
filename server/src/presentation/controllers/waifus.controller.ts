@@ -3,13 +3,13 @@ import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
 
-import { ListWaifusQueryRequest } from "src/domain/handlers/ListWaifus/listWaifus.query.request";
-import { ListWaifusQueryResponse } from "src/domain/handlers/ListWaifus/listWaifus.query.response";
 import { ResultModel } from "../../crossCutting/result.model";
 import { CreateWaifuCommandRequest } from "../../domain/handlers/CreateWaifu/createWaifu.command.request";
 import { CreateWaifuCommandResponse } from "../../domain/handlers/CreateWaifu/createWaifu.command.response";
 import { GetWaifuByIdQueryRequest } from "../../domain/handlers/GetWaifuById/getWaifuById.query.request";
 import { GetWaifuByIdQueryResponse } from "../../domain/handlers/GetWaifuById/getWaifuById.query.response";
+import { ListWaifusQueryRequest } from "../../domain/handlers/ListWaifus/listWaifus.query.request";
+import { ListWaifusQueryResponse } from "../../domain/handlers/ListWaifus/listWaifus.query.response";
 
 @Controller("waifus")
 @ApiTags("waifus")
