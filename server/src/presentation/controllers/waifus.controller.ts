@@ -1,8 +1,10 @@
-import { Body, Controller, Get, Param, Post, Res, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query, Res, UsePipes, ValidationPipe } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
 
+import { ListWaifusQueryRequest } from "src/domain/handlers/ListWaifus/listWaifus.query.request";
+import { ListWaifusQueryResponse } from "src/domain/handlers/ListWaifus/listWaifus.query.response";
 import { ResultModel } from "../../crossCutting/result.model";
 import { CreateWaifuCommandRequest } from "../../domain/handlers/CreateWaifu/createWaifu.command.request";
 import { CreateWaifuCommandResponse } from "../../domain/handlers/CreateWaifu/createWaifu.command.response";
@@ -14,6 +16,15 @@ import { GetWaifuByIdQueryResponse } from "../../domain/handlers/GetWaifuById/ge
 @UsePipes(new ValidationPipe({ transform: true }))
 export class WaifusController {
   constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
+
+  @Get()
+  async list(@Query() queryRequest: ListWaifusQueryRequest, @Res() response: Response) {
+    const handleResult = await this.queryBus.execute<ListWaifusQueryRequest, ResultModel<ListWaifusQueryResponse[]>>(
+      queryRequest,
+    );
+
+    return response.status(200).json(handleResult.data);
+  }
 
   @Get("/:id")
   async getById(@Param() queryRequest: GetWaifuByIdQueryRequest, @Res() response: Response) {
