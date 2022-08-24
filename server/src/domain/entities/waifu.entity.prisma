@@ -8,7 +8,7 @@ model Waifu {
 
     name           String    @db.VarChar(40)
     lore           String?   @db.Text()
-    image          String?   @db.VarChar(100)
+    image          String?   @db.VarChar(40)
     birthDate      DateTime?
     origin         String    @db.VarChar(40)
     myAnimeListUrl String    @db.VarChar()

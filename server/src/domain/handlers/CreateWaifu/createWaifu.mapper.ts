@@ -8,7 +8,7 @@ export function mapCreateWaifuCommandRequestToWaifu(commandRequest: CreateWaifuC
     id: uuid(),
     name: commandRequest.name,
     lore: commandRequest.lore,
-    image: commandRequest.image,
+    image: `${uuid()}.jpg`,
     birthDate: commandRequest.birthDate,
     origin: commandRequest.origin,
     myAnimeListUrl: commandRequest.myAnimeListUrl,
