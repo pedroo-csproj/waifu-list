@@ -1,6 +1,8 @@
 import { Module } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
 import { CqrsModule } from "@nestjs/cqrs";
 
+import { Configuration } from "./crossCutting/configuration";
 import { CreateWaifuHandler } from "./domain/handlers/CreateWaifu/createWaifu.handler";
 import { GetWaifuByIdHandler } from "./domain/handlers/GetWaifuById/getWaifuById.handler";
 import { ListWaifusHandler } from "./domain/handlers/ListWaifus/listWaifus.handler";
@@ -10,13 +12,14 @@ import { WaifuRepository } from "./infra/data/repositories/waifu.repository";
 import { WaifusController } from "./presentation/controllers/waifus.controller";
 
 @Module({
-  imports: [CqrsModule],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), CqrsModule],
   controllers: [WaifusController],
   providers: [
     CreateWaifuHandler,
     GetWaifuByIdHandler,
     ListWaifusHandler,
     PrismaService,
+    Configuration,
     { provide: "IWaifuRepository", useClass: WaifuRepository },
     { provide: "IFileProvider", useClass: FileProvider },
   ],
