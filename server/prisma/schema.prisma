@@ -9,6 +9,13 @@ generator client {
   binaryTargets = ["native", "linux-musl"]
 }
 
+model User {
+  id         String   @id @db.VarChar(36)
+  name       String   @db.VarChar(40)
+  password   String
+  createDate DateTime @default(now())
+}
+
 model Waifu {
   id             String    @id @db.VarChar(36)
   name           String    @db.VarChar(40)
