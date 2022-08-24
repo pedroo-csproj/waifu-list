@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, Query, Res, UsePipes, ValidationPipe } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
-import { ApiTags } from "@nestjs/swagger";
+import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
 
 import { ResultModel } from "../../crossCutting/result.model";
@@ -18,6 +18,12 @@ export class WaifusController {
   constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 
   @Get()
+  @ApiResponse({
+    status: 200,
+    description: "waifus retrivied successfully.",
+    type: ListWaifusQueryResponse,
+    isArray: true,
+  })
   async list(@Query() queryRequest: ListWaifusQueryRequest, @Res() response: Response) {
     const handleResult = await this.queryBus.execute<ListWaifusQueryRequest, ResultModel<ListWaifusQueryResponse[]>>(
       queryRequest,
@@ -27,6 +33,8 @@ export class WaifusController {
   }
 
   @Get("/:id")
+  @ApiResponse({ status: 200, description: "waifu retrivied successfully", type: GetWaifuByIdQueryResponse })
+  @ApiResponse({ status: 404, description: "error on retrive waifu", isArray: true })
   async getById(@Param() queryRequest: GetWaifuByIdQueryRequest, @Res() response: Response) {
     const handleResult = await this.queryBus.execute<GetWaifuByIdQueryRequest, ResultModel<GetWaifuByIdQueryResponse>>(
       queryRequest,
@@ -38,6 +46,8 @@ export class WaifusController {
   }
 
   @Post()
+  @ApiResponse({ status: 201, description: "waifu created successfully.", type: CreateWaifuCommandResponse })
+  @ApiResponse({ status: 400, description: "error on create waifu.", isArray: true })
   async create(@Body() commandRequest: CreateWaifuCommandRequest, @Res() response: Response) {
     const handleResult = await this.commandBus.execute<
       CreateWaifuCommandRequest,

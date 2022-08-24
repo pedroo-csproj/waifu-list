@@ -8,7 +8,7 @@ export class ListWaifusQueryRequest {
   }
 
   @ApiProperty({
-    description: "amiunt of Waifus to be retrivied",
+    description: "amount of Waifus to be retrivied",
     example: 15,
     minimum: 0,
   })
