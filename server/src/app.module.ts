@@ -51,4 +51,4 @@ import { LoginHandler } from "./domain/handlers/Login/login.handler";
     { provide: "IFileProvider", useClass: FileProvider },
   ],
 })
-export class AppModule { }
+export class AppModule {}
