@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Param, Post, Query, Res, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query, Res, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
-import { ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
 
 import { ResultModel } from "../../crossCutting/result.model";
@@ -10,9 +10,12 @@ import { GetWaifuByIdQueryRequest } from "../../domain/handlers/GetWaifuById/get
 import { GetWaifuByIdQueryResponse } from "../../domain/handlers/GetWaifuById/getWaifuById.query.response";
 import { ListWaifusQueryRequest } from "../../domain/handlers/ListWaifus/listWaifus.query.request";
 import { ListWaifusQueryResponse } from "../../domain/handlers/ListWaifus/listWaifus.query.response";
+import { JwtAuthGuard } from "../guards/jwtAuth.guard";
 
 @Controller("waifus")
 @ApiTags("waifus")
+@UseGuards(JwtAuthGuard)
+@ApiBearerAuth()
 @UsePipes(new ValidationPipe({ transform: true }))
 export class WaifusController {
   constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
