@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 
-import { comparePasswords } from "../../helpers/password.helper";
+import { comparePasswords } from "domain/helpers/password.helper";
 import { RegisterUserCommandRequest } from "./registerUser.command.request";
 import { mapRegisterUserCommandRequestToUser } from "./registerUser.mapper";
 

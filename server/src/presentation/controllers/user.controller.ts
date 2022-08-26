@@ -1,10 +1,10 @@
 import { Body, Controller, Post, Res, UsePipes, ValidationPipe } from "@nestjs/common";
-import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { CommandBus } from "@nestjs/cqrs";
+import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
 
-import { RegisterUserCommandRequest } from "../../domain/handlers/RegisterUser/registerUser.command.request";
-import { ResultModel } from "../../crossCutting/result.model";
+import { ResultModel } from "crossCutting/result.model";
+import { RegisterUserCommandRequest } from "domain/handlers/RegisterUser/registerUser.command.request";
 
 @Controller("users")
 @ApiTags("users")

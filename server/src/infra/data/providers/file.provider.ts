@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import * as fs from "fs";
 
-import { IFileProvider } from "../../../domain/providers/file.provider";
+import { IFileProvider } from "domain/providers/file.provider";
 
 @Injectable()
 export class FileProvider implements IFileProvider {

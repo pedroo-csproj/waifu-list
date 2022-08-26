@@ -1,8 +1,8 @@
 import { Inject } from "@nestjs/common";
 import { IQueryHandler, QueryHandler } from "@nestjs/cqrs";
 
-import { ResultModel } from "../../../crossCutting/result.model";
-import { IWaifuRepository } from "../../repositories/waifu.repository";
+import { ResultModel } from "crossCutting/result.model";
+import { IWaifuRepository } from "domain/repositories/waifu.repository";
 import { mapWaifuToGetWaifuByIdQueryResponse } from "./getWaifuById.mapper";
 import { GetWaifuByIdQueryRequest } from "./getWaifuById.query.request";
 import { GetWaifuByIdQueryResponse } from "./getWaifuById.query.response";

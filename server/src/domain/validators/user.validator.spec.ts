@@ -2,7 +2,7 @@ import { faker } from "@faker-js/faker";
 import { User } from "@prisma/client";
 import { uuid } from "uuidv4";
 
-import { hashPassword } from "../helpers/password.helper";
+import { hashPassword } from "domain/helpers/password.helper";
 import { validateUser } from "./user.validator";
 
 describe("user.validator", () => {

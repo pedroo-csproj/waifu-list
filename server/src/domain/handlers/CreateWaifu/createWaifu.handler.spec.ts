@@ -1,8 +1,8 @@
 import { uuid } from "uuidv4";
 
-import { PrismaService } from "../../../infra/data/prisma.service";
-import { FileProvider } from "../../../infra/data/providers/file.provider";
-import { WaifuRepository } from "../../../infra/data/repositories/waifu.repository";
+import { PrismaService } from "infra/data/prisma.service";
+import { FileProvider } from "infra/data/providers/file.provider";
+import { WaifuRepository } from "infra/data/repositories/waifu.repository";
 import { CreateWaifuCommandRequest } from "./createWaifu.command.request";
 import { CreateWaifuHandler } from "./createWaifu.handler";
 

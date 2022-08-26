@@ -1,8 +1,8 @@
 import { Waifu } from "@prisma/client";
 import { uuid } from "uuidv4";
 
-import { PrismaService } from "../../../infra/data/prisma.service";
-import { WaifuRepository } from "../../../infra/data/repositories/waifu.repository";
+import { PrismaService } from "infra/data/prisma.service";
+import { WaifuRepository } from "infra/data/repositories/waifu.repository";
 import { GetWaifuByIdHandler } from "./getWaifuById.handler";
 import { GetWaifuByIdQueryRequest } from "./getWaifuById.query.request";
 

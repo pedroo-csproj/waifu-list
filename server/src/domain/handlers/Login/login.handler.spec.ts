@@ -1,13 +1,13 @@
-import { User } from "@prisma/client";
 import { faker } from "@faker-js/faker";
+import { User } from "@prisma/client";
 import { uuid } from "uuidv4";
 
-import { PrismaService } from "../../../infra/data/prisma.service";
-import { UserRepository } from "../../../infra/data/repositories/user.repository";
+import { hashPassword } from "domain/helpers/password.helper";
+import { PrismaService } from "infra/data/prisma.service";
+import { UserRepository } from "infra/data/repositories/user.repository";
 import { LoginCommandRequest } from "./login.command.request";
-import { LoginHandler } from "./login.handler";
-import { hashPassword } from "../../helpers/password.helper";
 import { LoginCommandResponse } from "./login.command.response";
+import { LoginHandler } from "./login.handler";
 
 describe("login.handler", () => {
   beforeEach(() => {

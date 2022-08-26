@@ -1,13 +1,13 @@
-import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 import { Inject } from "@nestjs/common";
+import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
+import { ResultModel } from "crossCutting/result.model";
+import { IFileProvider } from "domain/providers/file.provider";
+import { IWaifuRepository } from "domain/repositories/waifu.repository";
+import { validateWaifu } from "domain/validators/waifu.validator";
 import { CreateWaifuCommandRequest } from "./createWaifu.command.request";
 import { CreateWaifuCommandResponse } from "./createWaifu.command.response";
-import { IWaifuRepository } from "../../repositories/waifu.repository";
-import { ResultModel } from "../../../crossCutting/result.model";
-import { validateWaifu } from "../../validators/waifu.validator";
 import { mapCreateWaifuCommandRequestToWaifu } from "./createWaifu.mapper";
-import { IFileProvider } from "../../providers/file.provider";
 
 @CommandHandler(CreateWaifuCommandRequest)
 export class CreateWaifuHandler

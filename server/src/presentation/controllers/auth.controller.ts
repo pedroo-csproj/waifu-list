@@ -4,9 +4,9 @@ import { JwtService } from "@nestjs/jwt";
 import { ApiResponse, ApiTags } from "@nestjs/swagger";
 import { Response } from "express";
 
-import { ResultModel } from "../../crossCutting/result.model";
-import { LoginCommandRequest } from "../../domain/handlers/Login/login.command.request";
-import { LoginCommandResponse } from "../../domain/handlers/Login/login.command.response";
+import { ResultModel } from "crossCutting/result.model";
+import { LoginCommandRequest } from "domain/handlers/Login/login.command.request";
+import { LoginCommandResponse } from "domain/handlers/Login/login.command.response";
 
 @Controller("auth")
 @ApiTags("auth")

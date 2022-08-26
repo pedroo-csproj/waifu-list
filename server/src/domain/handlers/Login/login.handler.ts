@@ -1,9 +1,9 @@
 import { Inject } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
-import { ResultModel } from "../../../crossCutting/result.model";
-import { comparePasswords } from "../../helpers/password.helper";
-import { IUserRepository } from "../../repositories/user.repository";
+import { ResultModel } from "crossCutting/result.model";
+import { comparePasswords } from "domain/helpers/password.helper";
+import { IUserRepository } from "domain/repositories/user.repository";
 import { LoginCommandRequest } from "./login.command.request";
 import { LoginCommandResponse } from "./login.command.response";
 

@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { IValidator, Validator, ValidationResult } from "ts.validator.fluent/dist";
+import { IValidator, ValidationResult, Validator } from "ts.validator.fluent/dist";
 
 const validateUserRules = (validator: IValidator<User>): ValidationResult => {
   return validator

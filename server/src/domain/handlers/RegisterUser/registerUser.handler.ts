@@ -1,9 +1,9 @@
 import { Inject } from "@nestjs/common";
 import { CommandHandler, ICommandHandler } from "@nestjs/cqrs";
 
-import { ResultModel } from "../../../crossCutting/result.model";
-import { IUserRepository } from "../../repositories/user.repository";
-import { validateUser } from "../../validators/user.validator";
+import { ResultModel } from "crossCutting/result.model";
+import { IUserRepository } from "domain/repositories/user.repository";
+import { validateUser } from "domain/validators/user.validator";
 import { RegisterUserCommandRequest } from "./registerUser.command.request";
 import { mapRegisterUserCommandRequestToUser } from "./registerUser.mapper";
 
