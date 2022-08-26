@@ -1,7 +1,19 @@
-import { Body, Controller, Get, Param, Post, Query, Res, UseGuards, UsePipes, ValidationPipe } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Query,
+  Req,
+  Res,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from "@nestjs/common";
 import { CommandBus, QueryBus } from "@nestjs/cqrs";
 import { ApiBearerAuth, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { Response } from "express";
+import { Request, Response } from "express";
 
 import { ResultModel } from "../../crossCutting/result.model";
 import { CreateWaifuCommandRequest } from "../../domain/handlers/CreateWaifu/createWaifu.command.request";
@@ -27,7 +39,9 @@ export class WaifusController {
     type: ListWaifusQueryResponse,
     isArray: true,
   })
-  async list(@Query() queryRequest: ListWaifusQueryRequest, @Res() response: Response) {
+  async list(@Query() queryRequest: ListWaifusQueryRequest, @Req() request: Request, @Res() response: Response) {
+    queryRequest.userId = request.user["id"];
+
     const handleResult = await this.queryBus.execute<ListWaifusQueryRequest, ResultModel<ListWaifusQueryResponse[]>>(
       queryRequest,
     );
@@ -38,7 +52,9 @@ export class WaifusController {
   @Get("/:id")
   @ApiResponse({ status: 200, description: "waifu retrivied successfully", type: GetWaifuByIdQueryResponse })
   @ApiResponse({ status: 404, description: "error on retrive waifu", isArray: true })
-  async getById(@Param() queryRequest: GetWaifuByIdQueryRequest, @Res() response: Response) {
+  async getById(@Param() queryRequest: GetWaifuByIdQueryRequest, @Req() request: Request, @Res() response: Response) {
+    queryRequest.userId = request.user["id"];
+
     const handleResult = await this.queryBus.execute<GetWaifuByIdQueryRequest, ResultModel<GetWaifuByIdQueryResponse>>(
       queryRequest,
     );
@@ -51,7 +67,9 @@ export class WaifusController {
   @Post()
   @ApiResponse({ status: 201, description: "waifu created successfully.", type: CreateWaifuCommandResponse })
   @ApiResponse({ status: 400, description: "error on create waifu.", isArray: true })
-  async create(@Body() commandRequest: CreateWaifuCommandRequest, @Res() response: Response) {
+  async create(@Body() commandRequest: CreateWaifuCommandRequest, @Req() request: Request, @Res() response: Response) {
+    commandRequest.userId = request.user["id"];
+
     const handleResult = await this.commandBus.execute<
       CreateWaifuCommandRequest,
       ResultModel<CreateWaifuCommandResponse>

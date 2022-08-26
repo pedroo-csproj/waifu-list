@@ -6,6 +6,7 @@ import { CreateWaifuCommandRequest } from "./createWaifu.command.request";
 export function mapCreateWaifuCommandRequestToWaifu(commandRequest: CreateWaifuCommandRequest): Waifu {
   const waifu: Waifu = {
     id: uuid(),
+    userId: commandRequest.userId,
     name: commandRequest.name,
     lore: commandRequest.lore,
     image: `${uuid()}.jpg`,

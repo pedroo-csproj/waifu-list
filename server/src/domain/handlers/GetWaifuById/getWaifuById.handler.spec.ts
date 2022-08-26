@@ -38,6 +38,7 @@ describe("getWaifuById.handler", () => {
     jest.spyOn(WaifuRepository.prototype, "findById").mockImplementation(async () => waifu);
     const waifu: Waifu = {
       id: uuid(),
+      userId: uuid(),
       name: "Asuka Langley",
       lore: "Asuka is the Second Child , who pilots Evangelion Unit 02. She is from Germany, but with an American father and a half-German, half-Japanese mother. In the Rebuild of Evangelion series of movies, her name is changed to Asuka Langley Shikinami.",
       image: "https://myanimelist.net/character/94/Asuka_Langley_Souryuu",

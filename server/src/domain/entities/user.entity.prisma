@@ -10,4 +10,13 @@ model User {
     password String
 
     createDate DateTime @default(now())
+
+    waifus Waifu[]
+}
+
+model Waifu {
+    id     String @id @unique @db.VarChar(36)
+    userId String @db.VarChar(36)
+
+    user User @relation(fields: [userId], references: [id])
 }

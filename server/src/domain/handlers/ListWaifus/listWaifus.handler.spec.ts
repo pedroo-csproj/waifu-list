@@ -26,6 +26,7 @@ describe("listWaifus.handler", () => {
     const waifus: Waifu[] = [
       {
         id: uuid(),
+        userId: uuid(),
         name: "Asuka Langley",
         lore: "Asuka is the Second Child , who pilots Evangelion Unit 02. She is from Germany, but with an American father and a half-German, half-Japanese mother. In the Rebuild of Evangelion series of movies, her name is changed to Asuka Langley Shikinami.",
         image: "https://myanimelist.net/character/94/Asuka_Langley_Souryuu",
@@ -36,6 +37,7 @@ describe("listWaifus.handler", () => {
       },
       {
         id: uuid(),
+        userId: uuid(),
         name: "Tomoyo Daidouji",
         lore: "Tomoyo, Madison Taylor in the English dub, is the best friend of the series heroine, Sakura Kinomoto. When she discovers that Sakura has become the Cardcaptor, she becomes Sakura's primary assistant by designing 'battle costumes' and filming all of her magical (and non-magical) endeavours.",
         image:

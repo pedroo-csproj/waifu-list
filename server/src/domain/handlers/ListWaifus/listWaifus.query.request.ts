@@ -7,6 +7,8 @@ export class ListWaifusQueryRequest {
     this.quantity = quantity;
   }
 
+  userId: string;
+
   @ApiProperty({
     description: "amount of Waifus to be retrivied",
     example: 15,

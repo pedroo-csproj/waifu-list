@@ -4,7 +4,8 @@ datasource db {
 }
 
 model Waifu {
-    id String @id @db.VarChar(36)
+    id     String @id @unique @db.VarChar(36)
+    userId String @db.VarChar(36)
 
     name           String    @db.VarChar(40)
     lore           String?   @db.Text()
@@ -14,4 +15,12 @@ model Waifu {
     myAnimeListUrl String    @db.VarChar()
 
     createDate DateTime @default(now())
+
+    user User @relation(fields: [userId], references: [id])
+}
+
+model User {
+    id String @id @db.VarChar(36)
+
+    waifus Waifu[]
 }

@@ -14,7 +14,7 @@ export class GetWaifuByIdHandler
   constructor(@Inject("IWaifuRepository") private readonly waifuRepository: IWaifuRepository) {}
 
   async execute(queryRequest: GetWaifuByIdQueryRequest): Promise<ResultModel<GetWaifuByIdQueryResponse>> {
-    const waifu = await this.waifuRepository.findById(queryRequest.id);
+    const waifu = await this.waifuRepository.findById(queryRequest.id, queryRequest.userId);
 
     if (waifu === null) return new ResultModel<GetWaifuByIdQueryResponse>(false, ["waifu doens't exists"]);
 

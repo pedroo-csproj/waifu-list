@@ -1,3 +1,5 @@
+import { uuid } from "uuidv4";
+
 import { CreateWaifuCommandRequest } from "./createWaifu.command.request";
 import { mapCreateWaifuCommandRequestToWaifu } from "./createWaifu.mapper";
 
@@ -12,12 +14,14 @@ describe("createWaifu.mapper", () => {
       "Wilhelmshaven, Lower Saxony, Germany",
       "https://myanimelist.net/character/94/Asuka_Langley_Souryuu",
     );
+    commandRequest.userId = uuid();
 
     // act
     const mappedWaifu = mapCreateWaifuCommandRequestToWaifu(commandRequest);
 
     // assert
     expect(mappedWaifu.id).toHaveLength(36);
+    expect(mappedWaifu.userId).toHaveLength(36);
     expect(mappedWaifu.name).toStrictEqual(commandRequest.name);
     expect(mappedWaifu.lore).toStrictEqual(commandRequest.lore);
     expect(mappedWaifu.birthDate).toStrictEqual(commandRequest.birthDate);

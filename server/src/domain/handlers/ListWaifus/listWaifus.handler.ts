@@ -14,7 +14,7 @@ export class ListWaifusHandler
   constructor(@Inject("IWaifuRepository") private readonly waifuRepository: IWaifuRepository) {}
 
   async execute(queryRequest: ListWaifusQueryRequest): Promise<ResultModel<ListWaifusQueryResponse[]>> {
-    const waifus = await this.waifuRepository.list(queryRequest.quantity);
+    const waifus = await this.waifuRepository.list(queryRequest.quantity, queryRequest.userId);
 
     const queryResponse = mapWaifusToListWaifusQueryResponse(waifus);
 

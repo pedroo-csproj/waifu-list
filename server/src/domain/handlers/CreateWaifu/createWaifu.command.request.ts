@@ -10,6 +10,8 @@ export class CreateWaifuCommandRequest {
     this.myAnimeListUrl = myAnimeListUrl;
   }
 
+  userId: string;
+
   @ApiProperty({
     description: "name of Waifu",
     example: "Asuka Lengley",

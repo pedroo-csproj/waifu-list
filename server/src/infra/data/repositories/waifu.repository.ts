@@ -8,12 +8,12 @@ import { PrismaService } from "../prisma.service";
 export class WaifuRepository implements IWaifuRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async list(quantity: number): Promise<Waifu[]> {
-    return await this.prismaService.waifu.findMany({ take: quantity });
+  async list(quantity: number, userId: string): Promise<Waifu[]> {
+    return await this.prismaService.waifu.findMany({ where: { userId }, take: quantity });
   }
 
-  async findById(id: string): Promise<Waifu> {
-    return await this.prismaService.waifu.findFirst({ where: { id } });
+  async findById(id: string, userId: string): Promise<Waifu> {
+    return await this.prismaService.waifu.findFirst({ where: { id, userId } });
   }
 
   async create(waifu: Waifu): Promise<void> {

@@ -1,3 +1,5 @@
+import { uuid } from "uuidv4";
+
 import { PrismaService } from "../../../infra/data/prisma.service";
 import { FileProvider } from "../../../infra/data/providers/file.provider";
 import { WaifuRepository } from "../../../infra/data/repositories/waifu.repository";
@@ -27,7 +29,9 @@ describe("createWaifu.handler", () => {
     "Wilhelmshaven, Lower Saxony, Germany",
     "https://myanimelist.net/character/94/Asuka_Langley_Souryuu",
   );
+  validCommandRequest.userId = uuid();
   const invalidCommandRequest = new CreateWaifuCommandRequest("", "", "", null, "", "");
+  invalidCommandRequest.userId = "";
 
   it("error on validate waifu", async () => {
     // arrange
