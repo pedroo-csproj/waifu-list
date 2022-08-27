@@ -5,6 +5,7 @@ import { FileProvider } from "infra/data/providers/file.provider";
 import { WaifuRepository } from "infra/data/repositories/waifu.repository";
 import { CreateWaifuCommandRequest } from "./createWaifu.command.request";
 import { CreateWaifuHandler } from "./createWaifu.handler";
+import { ELevel } from "domain/enums/level.enum";
 
 describe("createWaifu.handler", () => {
   beforeEach(() => {
@@ -13,12 +14,13 @@ describe("createWaifu.handler", () => {
     prismaService = new PrismaService();
     waifuRepository = new WaifuRepository(prismaService);
     fileProvider = new FileProvider();
-    commandHandler = new CreateWaifuHandler(waifuRepository, fileProvider);
+    commandHandler = new CreateWaifuHandler(waifuRepository, fileProvider, logProvider);
   });
 
   let prismaService: PrismaService;
   let waifuRepository: WaifuRepository;
   let fileProvider: FileProvider;
+  const logProvider = { log: jest.fn((level: ELevel, message: string) => null) };
   let commandHandler: CreateWaifuHandler;
 
   const validCommandRequest = new CreateWaifuCommandRequest(
