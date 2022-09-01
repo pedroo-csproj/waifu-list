@@ -1,6 +1,8 @@
 import { Waifu } from "@prisma/client";
 import { IValidator, ValidationResult, Validator } from "ts.validator.fluent/dist";
 
+import { buildErrors } from "domain/helpers/validator.helper";
+
 const validateWaifuRules = (validator: IValidator<Waifu>): ValidationResult => {
   return validator
     .NotNull((w) => w.id, "Should not be null", "Waifu.id")
@@ -24,7 +26,5 @@ const validateWaifuRules = (validator: IValidator<Waifu>): ValidationResult => {
 export const validateWaifu = (waifu: Waifu): string[] => {
   const validationResult = new Validator(waifu).Validate(validateWaifuRules);
 
-  const mappedErrors: string[] = validationResult.Errors.map((e) => `${e.Identifier} - ${e.Message}`);
-
-  return mappedErrors;
+  return buildErrors(validationResult);
 };

@@ -1,6 +1,8 @@
 import { User } from "@prisma/client";
 import { IValidator, ValidationResult, Validator } from "ts.validator.fluent/dist";
 
+import { buildErrors } from "domain/helpers/validator.helper";
+
 const validateUserRules = (validator: IValidator<User>): ValidationResult => {
   return validator
     .NotNull((w) => w.id, "Should not be null", "User.id")
@@ -18,7 +20,5 @@ const validateUserRules = (validator: IValidator<User>): ValidationResult => {
 export const validateUser = (user: User): string[] => {
   const validationResult = new Validator(user).Validate(validateUserRules);
 
-  const mappedErrors: string[] = validationResult.Errors.map((e) => `${e.Identifier} - ${e.Message}`);
-
-  return mappedErrors;
+  return buildErrors(validationResult);
 };
